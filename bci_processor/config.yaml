@@ -1,0 +1,45 @@
+# bci_processor/config.yaml
+data:
+  base_path: "./mtcaic3"
+  sampling_rate: 250
+  eeg_channels: ["FZ", "C3", "CZ", "C4", "PZ", "PO7", "OZ", "PO8"]
+  mi_samples_per_trial: 2250
+  ssvep_samples_per_trial: 1750
+
+preprocessing:
+  mi_freq_bands: [[4, 8], [8, 12], [12, 16], [16, 20], [20, 30]]
+  ssvep_freq_band: [5, 50]
+  notch_freq: 50.0
+  notch_quality: 30.0
+  butter_order: 6
+  ica_components: 8
+
+feature_extraction:
+  mi:
+    motor_channels: ["C3", "CZ", "C4"]
+    wavelet: "db4"
+    wavelet_levels: 5
+    csp_filters: 6
+    k_features: 60
+  ssvep:
+    target_freqs: [7, 8, 10, 13]
+    harmonics: [1, 2, 3, 4]
+    occipital_channels: ["PO7", "OZ", "PO8"]
+    n_fft: 8192
+    freq_range: 0.1
+    k_features: 120
+
+modeling:
+  mi:
+    model_type: "LinearDiscriminantAnalysis"
+    solver: "svd"
+    shrinkage: "auto"
+  ssvep:
+    model_type: "GradientBoostingClassifier"
+    param_dist:
+      n_estimators: [100, 200, 300, 500]
+      max_depth: [3, 5, 7, 10]
+      learning_rate: [0.01, 0.05, 0.1, 0.2]
+      subsample: [0.7, 0.8, 0.9]
+    n_iter: 20
+    cv: 5
