@@ -122,4 +122,4 @@ This project is licensed under the MIT License. See `LICENSE` for details.
 - **Team Leader**: Abdelrahman Ahmed Mahmoud Eldaba
 - **Email**: abdelrahmaneldaba123@gmail.com
 
-Thank you for exploring `bci-processor`! We hope this package provides a robust foundation for EEG-based BCI research.
+Thank you for exploring `bci-processor`!.
